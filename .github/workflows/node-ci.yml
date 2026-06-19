@@ -1,0 +1,39 @@
+name: CampusConnect CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Backend install + test
+      - name: Install Backend
+        run: |
+          cd server
+          npm install
+
+      - name: Run Backend Tests
+        run: |
+          cd server
+          npm test
+
+      # Frontend install + test
+      - name: Install Frontend
+        run: |
+          cd client
+          npm install
+
+      - name: Run Frontend Tests
+        run: |
+          cd client
+          npm test
