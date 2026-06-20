@@ -116,16 +116,25 @@ router.post("/login", async (req, res) => {
 
 
 // Get Users
-router.get("/", auth, async (req, res) => {
+// router.get("/", auth, async (req, res) => {
+//   try {
+//     const users = await User.find();
+
+//     res.json(users);
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// });
+
+router.get("/", async (req, res) => {
   try {
     const users = await User.find();
-
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ message: error.message });
   }
 });
 
